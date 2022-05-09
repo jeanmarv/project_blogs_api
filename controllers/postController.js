@@ -11,7 +11,7 @@ const postController = async (req, res) => {
         const user = await Users.create({ displayName, email, password, image });
         return res.status(201).json({ token: createToken(user.id) });
   } catch (err) {
-    res.status(409).json({ message: err.message });
+    res.status(500).json({ message: err.message });
   }
 };
 
