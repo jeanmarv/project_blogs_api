@@ -1,6 +1,6 @@
 const { Users } = require('../models');
 
-const getUserController = async (req, res) => {
+const getByIdController = async (req, res) => {
   const { id } = req.params;
   try {
     const getById = await Users.findByPk(id);
@@ -13,4 +13,4 @@ const getUserController = async (req, res) => {
   }
 };
 
-module.exports = getUserController;
+module.exports = getByIdController;
