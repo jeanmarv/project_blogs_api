@@ -13,4 +13,16 @@ const postCategories = async (req, res) => {
   }
 };
 
-module.exports = postCategories;
+const getCategories = async (req, res) => {
+  try {
+    const getAll = await Categories.findAll();
+    res.status(200).json(getAll);
+  } catch (error) {
+    res.status(401).json({ message: error.message });
+  }
+};
+
+module.exports = {
+  postCategories,
+  getCategories,
+};
