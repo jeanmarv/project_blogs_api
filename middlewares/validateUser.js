@@ -1,16 +1,42 @@
-const Joi = require('joi');
+const validateName = (req, res, next) => {
+  const { displayName } = req.body;
 
-const validateUser = (req, _res, next) => {
-    const { error } = Joi.object({
-        displayName: Joi.string().min(8).required(),
-        email: Joi.string().email().required(),
-        password: Joi.string().length(6).required(),
-        image: Joi.string(),
-    }).validate(req.body);
-
-    if (error) next(error);
-
-    next();
+  if (displayName.length < 8) {
+    return res.status(400)
+      .json({ message: '"displayName" length must be at least 8 characters long' });
+  }
+  next(); 
 };
 
-module.exports = validateUser;
+const validateEmail = async (req, res, next) => {
+  const { email } = req.body;
+  const emailReg = /\S+@\S+\.\S+/;
+
+  if (!email || email === '') { 
+      return res.status(400).json({ message: '"email" is required' });
+  }
+  if (!emailReg.test(email)) {
+    return res.status(400).json({ message: '"email" must be a valid email' });
+  }
+
+  next();
+};
+
+const validatePassword = (req, res, next) => {
+  const { password } = req.body;
+
+  if (!password || password === '') {
+      return res.status(400).json({ message: '"password" is required' });
+  }
+  if (password.length < 6 || password.length > 6) {
+    return res.status(400).json({ message: '"password" length must be 6 characters long' });
+  }
+
+  next();
+};
+
+module.exports = {
+  validateName,
+  validateEmail,
+  validatePassword,
+  };

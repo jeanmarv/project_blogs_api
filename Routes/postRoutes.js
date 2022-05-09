@@ -2,10 +2,10 @@ const express = require('express');
 
 const routes = express.Router();
 
-const validateUser = require('../middlewares/validateUser');
+const { validateName, validateEmail, validatePassword } = require('../middlewares/validateUser');
 
 const postController = require('../controllers/postController');
 
-routes.post('/', validateUser, postController);
+routes.post('/', validateName, validateEmail, validatePassword, postController);
 
 module.exports = routes;
