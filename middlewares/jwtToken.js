@@ -8,8 +8,12 @@ const createToken = (data) => {
 };
 
 const validateToken = (token) => {
+    try {
     const verifyToken = jwt.verify(token, JWT_SECRET);
     return verifyToken;
+    } catch (err) {
+        return false;
+    }
 };
 
 module.exports = {
