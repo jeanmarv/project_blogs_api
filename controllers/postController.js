@@ -6,7 +6,7 @@ const postController = async (req, res) => {
   try {
     const getEmail = await Users.findOne({ where: { email } });
     if (getEmail) {
-      return res.status(400).json({ message: 'User already registered' });
+      return res.status(409).json({ message: 'User already registered' });
     } 
         const user = await Users.create({ displayName, email, password, image });
         return res.status(201).json({ token: createToken(user.id) });
