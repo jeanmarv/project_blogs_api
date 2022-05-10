@@ -3,7 +3,7 @@ const express = require('express');
 const routes = express.Router();
 
 const { validateName, validateEmail, validatePassword } = require('../middlewares/validateUser');
-const postController = require('../controllers/postController');
+const postController = require('../controllers/userController');
 
 const verifyToken = require('../middlewares/validateToken');
 const getUserController = require('../controllers/getUserController');
